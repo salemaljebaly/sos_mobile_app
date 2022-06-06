@@ -10,8 +10,9 @@ class AuthService extends GetConnect {
   final String authPath = '/auth';
 
   Future<AuthResponseModel?> login(AuthModel model) async {
-    final response = await post("$loginUrl $path $authPath", model.toJson());
+    final response = await post("$loginUrl$path$authPath", model.toJson());
     print('------------------------------------------------------');
+    print("$loginUrl$path$authPath");
     print(response.statusCode == 201);
     print(response.headers);
     print(response.request);

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/model/auth_request_model.dart';
 import 'package:sos_mobile_app/services/auth_service.dart';
+import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/view/home_screen.dart';
 
 class AuthController extends GetxController {
   late final AuthService _authService;
@@ -18,14 +20,15 @@ class AuthController extends GetxController {
   // ------------------------------------------------------------------------ //
   // execute login
   Future<void> loginUser(String username, String password) async {
+    _authManager.logOut();
     final response = await _authService
         .login(AuthModel(username: username, password: password));
 
-    print(await _authService
-        .login(AuthModel(username: username, password: password)));
     if (response != null) {
-      print('login . > >');
       _authManager.login(response.accessToken);
+      Get.to(() => HomeScreen(
+            title: Strings.appName,
+          ));
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

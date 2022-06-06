@@ -70,10 +70,6 @@ class _LoginScreenState extends State<LoginScreen> {
             if (formKey.currentState?.validate() ?? false) {
               await _authController.loginUser(
                   usernameController.text, passwordController.text);
-
-              Get.to(HomeScreen(
-                title: Strings.appName,
-              ));
             }
           },
           child: Text('Login'),
