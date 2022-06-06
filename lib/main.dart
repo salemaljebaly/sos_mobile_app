@@ -8,16 +8,9 @@ void main() {
 }
 
 // --------------------------------------------------------------------------- //
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-// --------------------------------------------------------------------------- //
-class _MyAppState extends State<MyApp> {
-  // --------------------------------------------------------------------------- //
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -28,5 +21,6 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-  // --------------------------------------------------------------------------- //
 }
+  // --------------------------------------------------------------------------- //
+
