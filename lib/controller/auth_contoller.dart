@@ -26,9 +26,6 @@ class AuthController extends GetxController {
 
     if (response != null) {
       _authManager.login(response.accessToken);
-      Get.to(() => HomeScreen(
-            title: Strings.appName,
-          ));
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

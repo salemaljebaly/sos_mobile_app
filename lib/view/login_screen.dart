@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_contoller.dart';
+import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> formKey = GlobalKey();
   final AuthController _authController = Get.put(AuthController());
+  final AuthManager _authManager = Get.find();
   // edit
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -71,6 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
               await _authController.loginUser(
                   usernameController.text, passwordController.text);
             }
+            // check if user islogin or not
+            _authManager.isLogin.value
+                ? Get.to(() => HomeScreen(
+                      title: Strings.appName,
+                    ))
+                : null;
           },
           child: Text('Login'),
         ),
