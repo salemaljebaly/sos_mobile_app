@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class User {
-  User({
+class AuthModel {
+  AuthModel({
     required this.username,
     required this.password,
   });
@@ -9,11 +9,12 @@ class User {
   String username;
   String password;
 
-  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
+  factory AuthModel.fromRawJson(String str) =>
+      AuthModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
         username: json["username"],
         password: json["password"],
       );
