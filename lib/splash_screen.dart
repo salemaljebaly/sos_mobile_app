@@ -8,12 +8,14 @@ import 'package:sos_mobile_app/view/login_screen.dart';
 class SplashScreen extends StatelessWidget {
   final AuthManager _authmanager = Get.put(AuthManager());
 
+  SplashScreen({Key? key}) : super(key: key);
+  // --------------------------------------------------------------------------- //
   Future<void> initializeSettings() async {
     _authmanager.checkLoginSatus();
 
-    //Simulate other services for 3 seconds
     await Future.delayed(const Duration(seconds: 1));
   }
+  // --------------------------------------------------------------------------- //
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class SplashScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: const [
           Padding(
             padding: EdgeInsets.all(16.0),
             child: CircularProgressIndicator(),

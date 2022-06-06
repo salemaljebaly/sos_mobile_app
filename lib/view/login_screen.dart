@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_contoller.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
+import 'package:sos_mobile_app/view/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -70,7 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
               await _authController.loginUser(
                   usernameController.text, passwordController.text);
 
-              Get.to(CitizenScreen());
+              Get.to(HomeScreen(
+                title: Strings.appName,
+              ));
             }
           },
           child: Text('Login'),

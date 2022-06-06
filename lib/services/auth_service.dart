@@ -6,10 +6,11 @@ import 'package:sos_mobile_app/model/auth_response_model.dart';
 
 class AuthService extends GetConnect {
   final String loginUrl = dotenv.env['API_URL'] as String;
-  final String path = 'auth';
+  final String path = 'citizens';
+  final String authPath = '/auth';
 
   Future<AuthResponseModel?> login(AuthModel model) async {
-    final response = await post(loginUrl + path, model.toJson());
+    final response = await post("$loginUrl $path $authPath", model.toJson());
     print('------------------------------------------------------');
     print(response.statusCode == 201);
     print(response.headers);

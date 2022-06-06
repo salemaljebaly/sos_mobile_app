@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sos_mobile_app/utils/strings.dart';
 
 class HomeScreen extends StatelessWidget {
   final String title;
@@ -15,23 +16,9 @@ class HomeScreen extends StatelessWidget {
         // ),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text("Go to Other"),
-          onPressed: () => Get.to(
-            () => Other(),
-          ),
-        ),
+        child:
+            ElevatedButton(child: Text(Strings.appName), onPressed: () => {}),
       ),
     );
-  }
-}
-
-class Other extends StatelessWidget {
-  // You can ask Get to find a Controller that is being used by another page and redirect you to it.
-
-  @override
-  Widget build(context) {
-    // Access the updated count variable
-    return Scaffold(body: Center(child: Text("test")));
   }
 }
