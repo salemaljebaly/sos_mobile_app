@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sos_mobile_app/controller/contoller.dart';
+import 'package:sos_mobile_app/login/controller/contoller.dart';
 
 class HomeScreen extends StatelessWidget {
   final String title;
@@ -11,9 +11,10 @@ class HomeScreen extends StatelessWidget {
     final Controller myController = Get.put(Controller());
     return Scaffold(
       appBar: AppBar(
-        title: Obx(
-          () => Text("Clicks: ${myController.count}"),
-        ),
+        title: Text(title),
+        // Obx(
+        //   () => Text("Clicks: ${myController.count}"),
+        // ),
       ),
       body: Center(
         child: ElevatedButton(
