@@ -17,6 +17,9 @@ dependencies:
   get: ^4.6.5
   flutter_dotenv: ^5.0.2
   get_storage: ^2.0.3
+  # support svg icon format 
+  flutter_svg: ^1.0.3
+  google_fonts: ^3.0.1
 # ---------------------------------------------------------------- #
 dev_dependencies:
   flutter_test:
@@ -38,7 +41,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-  #   - images/a_dot_burr.jpeg
+    - assets/icons
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

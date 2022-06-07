@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './colors.dart';
 
 ThemeData appTheme = ThemeData(
   primaryColor: AppColors.primaryColor,
   backgroundColor: AppColors.backgroundColor,
+  fontFamily: GoogleFonts.almarai().fontFamily,
   appBarTheme:
       const AppBarTheme(backgroundColor: AppColors.primaryColor, elevation: 0),
   indicatorColor: AppColors.accentColor,
-  fontFamily: "Almarai",
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(

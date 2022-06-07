@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_contoller.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/utils/widgets/app_logo.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
 
@@ -30,9 +31,18 @@ class _LoginScreenState extends State<LoginScreen> {
             ? const Text('تسجيل الدخول')
             : const Text('تسجيل'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: _formType == FormType.login ? loginForm() : registerForm(),
+      body: Column(
+        children: [
+          // TODO need to fix
+          // AppLogo(
+          //     mainTitle: Strings.appName,
+          //     subTitle: '----------',
+          //     logo: 'assets/icons/sos_logo.svg'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: _formType == FormType.login ? loginForm() : registerForm(),
+          ),
+        ],
       ),
     );
   }
