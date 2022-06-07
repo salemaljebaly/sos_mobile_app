@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/routes/app_pages.dart';
 import 'package:sos_mobile_app/splash_screen.dart';
+import 'package:sos_mobile_app/theme/theme.dart';
 
 void main() async {
   // load .env file
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: Colors.red[400]),
+      theme: appTheme,
       home: SplashScreen(),
       getPages: AppPages.routes,
     );

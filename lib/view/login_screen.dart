@@ -52,7 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? Strings.emptyUsername
                 : null;
           },
-          decoration: inputDecoration('E-mail', Icons.person),
+          decoration: InputDecoration(
+            label: Text(Strings.username),
+          ),
         ),
         const SizedBox(
           height: 8,
@@ -66,23 +68,28 @@ class _LoginScreenState extends State<LoginScreen> {
           controller: passwordController,
           decoration: InputDecoration(
             label: Text(Strings.password),
-            border: const OutlineInputBorder(),
           ),
         ),
-        ElevatedButton(
-          onPressed: () async {
-            if (formKey.currentState?.validate() ?? false) {
-              await _authController.loginUser(
-                  usernameController.text, passwordController.text);
-            }
-            // check if user islogin or not
-            _authManager.isLogin.value
-                ? Get.to(() => HomeScreen(
-                      title: Strings.appName,
-                    ))
-                : null;
-          },
-          child: Text('Login'),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () async {
+              if (formKey.currentState?.validate() ?? false) {
+                await _authController.loginUser(
+                    usernameController.text, passwordController.text);
+              }
+              // check if user islogin or not
+              _authManager.isLogin.value
+                  ? Get.to(() => HomeScreen(
+                        title: Strings.appName,
+                      ))
+                  : null;
+            },
+            child: Text(Strings.login),
+          ),
         ),
         TextButton(
           onPressed: () {
