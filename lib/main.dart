@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.red[400]),
       home: SplashScreen(),

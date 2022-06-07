@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
           controller: usernameController,
           validator: (value) {
             return (value == null || value.isEmpty)
-                ? 'Please Enter Email'
+                ? Strings.emptyUsername
                 : null;
           },
           decoration: inputDecoration('E-mail', Icons.person),
@@ -65,7 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           controller: passwordController,
           decoration: InputDecoration(
-              label: Text("كلمة المرور"), border: const OutlineInputBorder()),
+            label: Text(Strings.password),
+            border: const OutlineInputBorder(),
+          ),
         ),
         ElevatedButton(
           onPressed: () async {
