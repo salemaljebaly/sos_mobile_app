@@ -20,5 +20,9 @@ class Strings {
   static String city = 'المدينة';
   static String longitude = 'حط الطول';
   static String latitude = 'خط العرض';
+
+  static String selectLocation = 'تحديد مكانك على الخريطة';
+
+  static String takeLocation = 'مكاني';
   // ------------------------------------------------------------------------ //
 }

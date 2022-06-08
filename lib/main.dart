@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sos_mobile_app/routes/app_pages.dart';
 import 'package:sos_mobile_app/splash_screen.dart';
 import 'package:sos_mobile_app/theme/theme.dart';
+import 'package:sos_mobile_app/view/current_location_screen.dart';
 
 void main() async {
   // load .env file
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: SplashScreen(),
+      home: const CurrentLocationScreen(),
       getPages: AppPages.routes,
     );
   }
