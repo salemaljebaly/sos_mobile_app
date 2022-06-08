@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/model/auth_request_model.dart';
+import 'package:sos_mobile_app/model/citizen_request_model.dart';
 import 'package:sos_mobile_app/services/auth_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
@@ -9,6 +10,7 @@ import 'package:sos_mobile_app/view/home_screen.dart';
 class AuthController extends GetxController {
   late final AuthService _authService;
   late final AuthManager _authManager;
+  RxBool isCitizenCreated = false.obs;
 
   @override
   void onInit() {
@@ -25,11 +27,32 @@ class AuthController extends GetxController {
         .login(AuthModel(username: username, password: password));
 
     if (response != null) {
-      _authManager.login(response.accessToken);
+      isCitizenCreated.value = true;
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
           middleText: 'User not found!',
+          textConfirm: 'OK',
+          confirmTextColor: Colors.white,
+          onConfirm: () {
+            Get.back();
+          });
+    }
+  }
+
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  // execute login
+  Future<void> createCitizen(CitizenRequestModel citizenRequestModel) async {
+    final response = await _authService.create(citizenRequestModel);
+
+    // print(response.toString());
+    if (response != null) {
+      print(response.body);
+    } else {
+      /// Show user a dialog about the error response
+      Get.defaultDialog(
+          middleText: 'some thing wrong',
           textConfirm: 'OK',
           confirmTextColor: Colors.white,
           onConfirm: () {

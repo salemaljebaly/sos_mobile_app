@@ -9,6 +9,7 @@ ThemeData appTheme = ThemeData(
   appBarTheme:
       const AppBarTheme(backgroundColor: AppColors.primaryColor, elevation: 0),
   indicatorColor: AppColors.accentColor,
+  // button style
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -22,6 +23,7 @@ ThemeData appTheme = ThemeData(
       ),
     ),
   ),
+  // input decoration style
   inputDecorationTheme: const InputDecorationTheme(
       labelStyle: TextStyle(
         color: AppColors.primaryColor,

@@ -17,8 +17,12 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 20,
+        ),
         SvgPicture.asset(
           logo,
+          width: 100,
         ),
         Center(
           child: Padding(
