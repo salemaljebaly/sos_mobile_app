@@ -11,6 +11,8 @@ class AuthController extends GetxController {
   late final AuthService _authService;
   late final AuthManager _authManager;
   RxBool isCitizenCreated = false.obs;
+  RxDouble citizenLatitude = 0.0.obs;
+  RxDouble citizenLongitude = 0.0.obs;
 
   @override
   void onInit() {
@@ -25,7 +27,7 @@ class AuthController extends GetxController {
     _authManager.logOut();
     final response = await _authService
         .login(AuthModel(username: username, password: password));
-
+    print('login res' + response.toString());
     if (response != null) {
       isCitizenCreated.value = true;
     } else {
@@ -46,7 +48,7 @@ class AuthController extends GetxController {
   Future<void> createCitizen(CitizenRequestModel citizenRequestModel) async {
     final response = await _authService.create(citizenRequestModel);
 
-    // print(response.toString());
+    print(response.toString());
     if (response != null) {
       print(response.body);
     } else {

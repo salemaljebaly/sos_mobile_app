@@ -24,5 +24,11 @@ class Strings {
   static String selectLocation = 'تحديد مكانك على الخريطة';
 
   static String takeLocation = 'مكاني';
+
+  static var generalInfo = 'المعلومات الاساسية';
+
+  static var mustBeEmail = 'يجب ادخال ايميل';
+
+  static var mustBePhone = 'يجب ادخال هاتف مثل : 914034745';
   // ------------------------------------------------------------------------ //
 }

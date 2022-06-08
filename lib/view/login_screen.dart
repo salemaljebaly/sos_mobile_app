@@ -6,6 +6,7 @@ import 'package:sos_mobile_app/model/citizen_request_model.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/utils/widgets/app_logo.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
+import 'package:sos_mobile_app/view/current_location_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -127,6 +128,31 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget myStepper() {
+    int currentStep = 0;
+    return Stepper(
+      type: StepperType.horizontal,
+      currentStep: currentStep,
+      onStepTapped: (index) {
+        setState(() {
+          currentStep = index;
+        });
+      },
+      steps: [
+        Step(
+          isActive: currentStep >= 0,
+          title: Text(Strings.generalInfo),
+          content: registerForm(),
+        ),
+        Step(
+          isActive: currentStep >= 1,
+          title: Text(Strings.generalInfo),
+          content: Text('map'),
+        ),
+      ],
+    );
+  }
+
   // ------------------------------------------------------------------------------- //
   // login form
   Form registerForm() {
@@ -165,8 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
         TextFormField(
           controller: email,
           validator: (value) {
-            return (value == null || value.isEmpty)
-                ? Strings.emptyUsername
+            return (value == null || !value.isEmail)
+                ? Strings.mustBeEmail
                 : null;
           },
           keyboardType: TextInputType.emailAddress,
@@ -194,8 +220,8 @@ class _LoginScreenState extends State<LoginScreen> {
         TextFormField(
           controller: phone,
           validator: (value) {
-            return (value == null || value.isEmpty)
-                ? Strings.emptyUsername
+            return (value == null || !value.isPhoneNumber)
+                ? Strings.mustBePhone
                 : null;
           },
           keyboardType: TextInputType.phone,
@@ -220,19 +246,47 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(
           height: 8,
         ),
-        TextFormField(
-          controller: password,
-          validator: (value) {
-            return (value == null || value.isEmpty)
-                ? Strings.emptyUsername
-                : null;
-          },
-          decoration: InputDecoration(
-            label: Text(Strings.password),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
+        Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: TextFormField(
+                controller: password,
+                validator: (value) {
+                  return (value == null || value.isEmpty)
+                      ? Strings.emptyUsername
+                      : null;
+                },
+                decoration: InputDecoration(
+                  label: Text(Strings.password),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            Expanded(
+              flex: 2,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // convert to getx dialog and fix width
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return const AlertDialog(
+                          contentPadding: EdgeInsets.all(0),
+                          content: CurrentLocationScreen(),
+                        );
+                      });
+                },
+                icon: Icon(Icons.location_on_sharp),
+                label: Text('الموقع'),
+              ),
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+          ],
         ),
         SizedBox(
           width: double.infinity,
@@ -247,12 +301,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   password: password.text,
                   isActive: false,
                   city: city.text,
-                  longitude: '32.262209554087114',
-                  latitude: '15.187961734047132');
+                  longitude: _authController.citizenLongitude.value.toString(),
+                  latitude: _authController.citizenLatitude.value.toString());
               if (formKey.currentState?.validate() ?? false) {
                 await _authController.createCitizen(citizenRequestModel);
               }
-              ;
+
               _authController.isCitizenCreated.value
                   ? setState(() {
                       _formType = FormType.login;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sos_mobile_app/controller/auth_contoller.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
@@ -11,6 +13,7 @@ class CurrentLocationScreen extends StatefulWidget {
 }
 
 class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
+  final AuthController _authController = Get.put(AuthController());
   //
   late GoogleMapController googleMapController;
   //
@@ -23,7 +26,10 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.selectLocation),
+        title: Text(
+          Strings.selectLocation,
+          style: TextStyle(fontSize: 16),
+        ),
         centerTitle: true,
       ),
       body: GoogleMap(
@@ -34,21 +40,18 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         onMapCreated: (GoogleMapController controller) {
           googleMapController = controller;
         },
+        onLongPress: (position) {
+          setState(() {
+            moveCameraAndCreateMarker(position.latitude, position.longitude);
+          });
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           Position position = await _determinePosition();
-          // navigate camera to currect user location
-          googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                  target: LatLng(position.latitude, position.longitude),
-                  zoom: 14)));
-
-          markers.clear();
-          // add marker to current user location
-          markers.add(Marker(
-              markerId: const MarkerId('currentLocation'),
-              position: LatLng(position.latitude, position.longitude)));
+          setState(() {
+            moveCameraAndCreateMarker(position.latitude, position.longitude);
+          });
         },
         label: Text(Strings.takeLocation),
         icon: const Icon(Icons.location_history),
@@ -83,5 +86,22 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
     Position position = await Geolocator.getCurrentPosition();
 
     return position;
+  }
+
+  // move camera to selected location
+  moveCameraAndCreateMarker(double latitude, double longitude) {
+    // navigate camera to currect user location
+    googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(latitude, longitude), zoom: 14)));
+
+    markers.clear();
+    // add marker to current user location
+    markers.add(Marker(
+        markerId: const MarkerId('currentLocation'),
+        position: LatLng(latitude, longitude)));
+
+    // store latlong in Get state
+    _authController.citizenLatitude.value = latitude;
+    _authController.citizenLongitude.value = longitude;
   }
 }

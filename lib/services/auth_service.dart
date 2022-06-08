@@ -23,6 +23,8 @@ class AuthService extends GetConnect {
   // create citizen account
   Future<Response?> create(CitizenRequestModel model) async {
     final response = await post("$loginUrl$path", model.toJson());
+    print('response' + response.body.toString());
+    print('response' + response.statusCode.toString());
     if (response.statusCode == HttpStatus.created) {
       return response;
     } else {
