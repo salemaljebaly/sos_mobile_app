@@ -106,12 +106,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 await _authController.loginUser(
                     usernameController.text, passwordController.text);
               }
-              // check if user islogin or not
-              _authManager.isLogin.value
-                  ? Get.to(() => HomeScreen(
-                        title: Strings.appName,
-                      ))
-                  : null;
+              // Obx(() {
+              //   _authManager.isLogin.value
+              //     ? Get.to(() => HomeScreen(
+              //           title: Strings.appName,
+              //         ))
+              //     : null;
+              // }),
             },
             child: Text(Strings.login),
           ),

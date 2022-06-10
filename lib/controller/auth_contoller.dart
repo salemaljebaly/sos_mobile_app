@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
@@ -27,9 +29,13 @@ class AuthController extends GetxController {
     _authManager.logOut();
     final response = await _authService
         .login(AuthModel(username: username, password: password));
-    print('login res' + response.toString());
+    // navigate to homescreen
     if (response != null) {
       isCitizenCreated.value = true;
+      _authManager.saveToken(response.accessToken);
+      Get.to(() => HomeScreen(
+            title: Strings.appName,
+          ));
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
@@ -43,8 +49,7 @@ class AuthController extends GetxController {
   }
 
   // ------------------------------------------------------------------------ //
-  // ------------------------------------------------------------------------ //
-  // execute login
+  // create citizen
   Future<void> createCitizen(CitizenRequestModel citizenRequestModel) async {
     final response = await _authService.create(citizenRequestModel);
 
@@ -62,5 +67,29 @@ class AuthController extends GetxController {
           });
     }
   }
+
   // ------------------------------------------------------------------------ //
+  // create citizen
+  Future<void> findOne(String token) async {
+    int id = _authManager.getUserIdFromToken(token);
+    final response = await _authService.findOne(id, token);
+
+    print(response.toString());
+    if (response != null) {
+      print(response);
+      _authManager.storeCitizenData(response);
+    } else {
+      /// Show user a dialog about the error response
+      Get.defaultDialog(
+          middleText: 'some thing wrong',
+          textConfirm: 'OK',
+          confirmTextColor: Colors.white,
+          onConfirm: () {
+            Get.back();
+          });
+    }
+  }
+
+  // ------------------------------------------------------------------------ //
+  void logOut() => _authManager.logOut();
 }

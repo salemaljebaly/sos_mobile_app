@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   // --------------------------------------------------------------------------- //
   Future<void> initializeSettings() async {
     _authmanager.checkLoginSatus();
-
+    print('use state =' + _authmanager.isLogin.value.toString());
     await Future.delayed(const Duration(seconds: 1));
   }
   // --------------------------------------------------------------------------- //

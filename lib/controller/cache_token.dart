@@ -1,4 +1,5 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:sos_mobile_app/model/citizen_response_model.dart';
 
 mixin CacheToken {
   // ------------------------------------------------------------------------------- //
@@ -13,7 +14,7 @@ mixin CacheToken {
   // get token from local storage
   String? getToken() {
     final box = GetStorage();
-    box.read(CacheTokenKey.token.toString());
+    return box.read(CacheTokenKey.token.toString());
   }
 
   // ------------------------------------------------------------------------------- //
@@ -22,7 +23,17 @@ mixin CacheToken {
     final box = GetStorage();
     await box.remove(CacheTokenKey.token.toString());
   }
+
   // ------------------------------------------------------------------------------- //
+  // remove token
+  Future<void> storeCitizenData(
+      CitizenResponseModel citizenResponseModel) async {
+    final citizenData = GetStorage();
+    await citizenData.write(
+        CacheTokenKey.citizenData.toString(), citizenResponseModel);
+  }
+  // ------------------------------------------------------------------------------- //
+
 }
 
-enum CacheTokenKey { token }
+enum CacheTokenKey { token, citizenData }

@@ -25,10 +25,17 @@ class Strings {
 
   static String takeLocation = 'مكاني';
 
-  static var generalInfo = 'المعلومات الاساسية';
+  static String generalInfo = 'المعلومات الاساسية';
 
-  static var mustBeEmail = 'يجب ادخال ايميل';
+  static String mustBeEmail = 'يجب ادخال ايميل';
 
-  static var mustBePhone = 'يجب ادخال هاتف مثل : 914034745';
+  static String mustBePhone = 'يجب ادخال هاتف مثل : 914034745';
+  // ------------------------------------------------------------------------ //
+  static String reports = 'التقارير';
+  static String policeOffices = 'مراكز الشرطة';
+  static String about = 'حول';
+  static String logout = 'تسجيل الخروج';
+
+  static String myAccount = 'حسابي';
   // ------------------------------------------------------------------------ //
 }

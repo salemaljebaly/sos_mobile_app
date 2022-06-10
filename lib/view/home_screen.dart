@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/utils/widgets/drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   final String title;
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text(title),
         // Obx(
