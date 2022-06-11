@@ -26,11 +26,19 @@ mixin CacheToken {
 
   // ------------------------------------------------------------------------------- //
   // remove token
-  Future<void> storeCitizenData(
+  Future<bool> storeCitizenData(
       CitizenResponseModel citizenResponseModel) async {
     final citizenData = GetStorage();
     await citizenData.write(
         CacheTokenKey.citizenData.toString(), citizenResponseModel);
+    return true;
+  }
+
+  // ------------------------------------------------------------------------------- //
+  // get citizenData from local storage
+  CitizenResponseModel? getCitizenData() {
+    final box = GetStorage();
+    return box.read(CacheTokenKey.citizenData.toString());
   }
   // ------------------------------------------------------------------------------- //
 

@@ -16,7 +16,7 @@ class AuthManager extends GetxController with CacheToken {
     await saveToken(token);
   }
 
-  void getAuthToken() => getToken();
+  String? getAuthToken() => getToken();
 
   // check user token
   void checkLoginSatus() {

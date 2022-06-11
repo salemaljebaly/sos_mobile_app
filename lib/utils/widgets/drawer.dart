@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sos_mobile_app/controller/auth_contoller.dart';
+import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/controller/cache_token.dart';
+import 'package:sos_mobile_app/model/citizen_response_model.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
@@ -35,6 +37,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(Strings.myAccount),
             onTap: () {
+              _authController.findOne();
               Get.to(() => CitizenScreen());
             },
           ),

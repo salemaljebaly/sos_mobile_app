@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/model/auth_request_model.dart';
 import 'package:sos_mobile_app/model/citizen_request_model.dart';
+import 'package:sos_mobile_app/model/citizen_response_model.dart';
 import 'package:sos_mobile_app/services/auth_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
@@ -70,14 +71,15 @@ class AuthController extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // create citizen
-  Future<void> findOne(String token) async {
-    int id = _authManager.getUserIdFromToken(token);
-    final response = await _authService.findOne(id, token);
-
-    print(response.toString());
+  Future<void> findOne() async {
+    int id =
+        _authManager.getUserIdFromToken(_authManager.getAuthToken().toString());
+    final response =
+        await _authService.findOne(id, _authManager.getAuthToken().toString());
+    print(response.runtimeType);
     if (response != null) {
-      print(response);
       _authManager.storeCitizenData(response);
+      print(_authManager.getCitizenData());
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
