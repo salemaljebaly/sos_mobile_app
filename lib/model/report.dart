@@ -35,3 +35,7 @@ class Report {
         "latitude": latitude,
       };
 }
+
+enum ReportType { Fire, Ambulance, Accidant }
+
+enum ReportState { pending, processing, done }

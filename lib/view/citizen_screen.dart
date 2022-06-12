@@ -73,23 +73,46 @@ class CitizenScreen extends StatelessWidget {
                       _launchUrl();
                     },
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      icon: const Icon(Icons.edit),
-                      label: Text(Strings.edit),
-                      onPressed: (() => {
-                            _pageController.animateToPage(2,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.bounceIn)
-                          }),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 58.0,
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(width: 1.0, color: Colors.red),
+                        ),
+                        icon: const Icon(
+                          Icons.edit,
+                          color: Colors.red,
+                        ),
+                        label: Text(
+                          Strings.edit,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        onPressed: (() => {
+                              _pageController.animateToPage(2,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.bounceIn)
+                            }),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             SingleChildScrollView(
-              child: registerForm(context),
+              child: Column(
+                children: [
+                  AppLogo(
+                      mainTitle: Strings.editCitizen,
+                      subTitle: '',
+                      logo: 'assets/icons/logo.png'),
+                  Padding(
+                      child: registerForm(context),
+                      padding: const EdgeInsets.all(4.0)),
+                ],
+              ),
             )
           ],
         ),
@@ -241,24 +264,34 @@ class CitizenScreen extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () async {
-              citizenRequestModel = CitizenRequestModel(
-                  firstName: firstName.text,
-                  lastName: lastName.text,
-                  username: _authController.username.toString(),
-                  email: email.text,
-                  phone: '+218' + phone.text,
-                  password: password.text,
-                  isActive: false,
-                  city: city.text,
-                  longitude: _authController.citizenLongitude.value.toString(),
-                  latitude: _authController.citizenLatitude.value.toString());
-              await _authController.updateOne(citizenRequestModel);
-            },
-            child: Text(Strings.save),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: SizedBox(
+            width: double.infinity,
+            height: 58.5,
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  side: const BorderSide(width: 1.0, color: Colors.red)),
+              onPressed: () async {
+                citizenRequestModel = CitizenRequestModel(
+                    firstName: firstName.text,
+                    lastName: lastName.text,
+                    username: _authController.username.toString(),
+                    email: email.text,
+                    phone: '+218' + phone.text,
+                    password: password.text,
+                    isActive: false,
+                    city: city.text,
+                    longitude:
+                        _authController.citizenLongitude.value.toString(),
+                    latitude: _authController.citizenLatitude.value.toString());
+                await _authController.updateOne(citizenRequestModel);
+              },
+              child: Text(
+                Strings.save,
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
           ),
         ),
       ]),

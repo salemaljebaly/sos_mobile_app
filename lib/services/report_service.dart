@@ -2,12 +2,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sos_mobile_app/controller/cache_token.dart';
-import 'package:sos_mobile_app/model/citizen_response_model.dart';
 import 'package:sos_mobile_app/model/report.dart';
 
-class AuthService extends GetConnect {
+class ReportService extends GetConnect {
   final String url = dotenv.env['API_URL'] as String;
   final String path = 'report';
   final GetStorage token = GetStorage();
@@ -100,11 +98,9 @@ class AuthService extends GetConnect {
 
   // -------------------------------------------------------------------------- //
   // upload report image
-  Future<int?> upload(int id) async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<Response?> upload(int id, dynamic data) async {
     final form = FormData({
-      'file': MultipartFile(image, filename: 'avatar.png'),
-      'otherFile': MultipartFile(image, filename: 'cover.png'),
+      'file': MultipartFile(data, filename: 'avatar.png'),
     });
     final response = await post("$url$path/upload", form, headers: {
       'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
@@ -116,5 +112,20 @@ class AuthService extends GetConnect {
     }
   }
 
+  // -------------------------------------------------------------------------- //
+  // get image by id
+  Future<Response?> getImage(int id) async {
+    final response = await get(
+      "$url$path/upload/view/$id",
+      headers: {
+        'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
+      },
+    );
+    if (response.statusCode == HttpStatus.ok) {
+      return response.body;
+    } else {
+      return null;
+    }
+  }
   // -------------------------------------------------------------------------- //
 }

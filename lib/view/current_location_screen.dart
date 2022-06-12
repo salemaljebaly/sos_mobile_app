@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sos_mobile_app/controller/auth_contoller.dart';
+import 'package:sos_mobile_app/controller/report_controller.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
@@ -14,9 +17,10 @@ class CurrentLocationScreen extends StatefulWidget {
 
 class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   final AuthController _authController = Get.put(AuthController());
-  //
+  final ReportConteroller _reportConteroller = Get.put(ReportConteroller());
+  // set map controller
   late GoogleMapController googleMapController;
-  //
+  // init map camera
   static const CameraPosition initialCameraPosition = CameraPosition(
       target: LatLng(32.37048830543665, 15.086157669110053), zoom: 14);
 
@@ -28,7 +32,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
       appBar: AppBar(
         title: Text(
           Strings.selectLocation,
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
         centerTitle: true,
       ),
@@ -40,22 +44,36 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         onMapCreated: (GoogleMapController controller) {
           googleMapController = controller;
         },
+        // -------------------------------------------------------------------- //
         onLongPress: (position) {
           setState(() {
             moveCameraAndCreateMarker(position.latitude, position.longitude);
           });
+
+          // close map after delay
+          Timer(const Duration(seconds: 3), () {
+            Navigator.pop(context);
+          });
         },
       ),
+      // -------------------------------------------------------------------- //
+      // get current location
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.red[400],
         onPressed: () async {
           Position position = await _determinePosition();
           setState(() {
             moveCameraAndCreateMarker(position.latitude, position.longitude);
           });
+          // close map after delay
+          Timer(const Duration(seconds: 3), () {
+            Navigator.pop(context);
+          });
         },
         label: Text(Strings.takeLocation),
         icon: const Icon(Icons.location_history),
       ),
+      // -------------------------------------------------------------------- //
     );
   }
 
@@ -100,8 +118,11 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         markerId: const MarkerId('currentLocation'),
         position: LatLng(latitude, longitude)));
 
-    // store latlong in Get state
+    // store latlong in Get state citizen controller
     _authController.citizenLatitude.value = latitude;
     _authController.citizenLongitude.value = longitude;
+    // store latlong in Get state report controller
+    _reportConteroller.latitude.value = latitude.toString();
+    _reportConteroller.latitude.value = longitude.toString();
   }
 }

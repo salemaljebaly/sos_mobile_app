@@ -46,4 +46,17 @@ class Strings {
 
   static String save = 'حفظ';
   // ------------------------------------------------------------------------ //
+  // report type
+  static String Fire = 'حريق';
+  static String Accidant = 'حادث';
+  static String Ambulance = 'اسعاف';
+  // ------------------------------------------------------------------------ //
+  static String someThingWrong = 'حدث خطأ';
+
+  static String ok = 'موافق';
+
+  static String sendReport = 'تقديم بلاغ';
+
+  static String editCitizen = 'تعديل ملفي الشخصي';
+  // ------------------------------------------------------------------------ //
 }

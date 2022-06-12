@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
+import 'package:sos_mobile_app/view/login_screen.dart';
+import 'package:sos_mobile_app/view/report_screen.dart';
 
 part 'app_routes.dart';
 
@@ -13,12 +16,16 @@ class AppPages {
       page: () => HomeScreen(title: Strings.appName),
     ),
     GetPage(
-      name: Routes.PROFILE,
-      page: () => HomeScreen(title: Strings.appName),
+      name: Routes.REPORT,
+      page: () => const ReportScreen(),
     ),
     GetPage(
-      name: Routes.REPORT,
-      page: () => HomeScreen(title: Strings.appName),
+      name: Routes.CITIZEN,
+      page: () => CitizenScreen(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => const LoginScreen(),
     ),
     GetPage(
       name: Routes.POLICE_OFFICES,
