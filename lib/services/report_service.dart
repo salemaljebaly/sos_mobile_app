@@ -19,6 +19,7 @@ class ReportService extends GetConnect {
         'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
       },
     );
+    print(response.body);
     if (response.statusCode == HttpStatus.created) {
       return response;
     } else {

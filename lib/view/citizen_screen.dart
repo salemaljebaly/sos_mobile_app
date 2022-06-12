@@ -271,7 +271,8 @@ class CitizenScreen extends StatelessWidget {
             height: 58.5,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  side: const BorderSide(width: 1.0, color: Colors.red)),
+                side: const BorderSide(width: 1.0, color: Colors.red),
+              ),
               onPressed: () async {
                 citizenRequestModel = CitizenRequestModel(
                     firstName: firstName.text,

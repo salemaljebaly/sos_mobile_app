@@ -58,5 +58,7 @@ class Strings {
   static String sendReport = 'تقديم بلاغ';
 
   static String editCitizen = 'تعديل ملفي الشخصي';
+
+  static String reportDesc = 'تفاصيل البلاغ';
   // ------------------------------------------------------------------------ //
 }

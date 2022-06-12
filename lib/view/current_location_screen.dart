@@ -123,6 +123,6 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
     _authController.citizenLongitude.value = longitude;
     // store latlong in Get state report controller
     _reportConteroller.latitude.value = latitude.toString();
-    _reportConteroller.latitude.value = longitude.toString();
+    _reportConteroller.longitude.value = longitude.toString();
   }
 }
