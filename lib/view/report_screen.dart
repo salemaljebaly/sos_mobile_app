@@ -23,6 +23,7 @@ class _ReportScreenState extends State<ReportScreen> {
   TextEditingController desc = TextEditingController();
   // dropdown items
   List<String> items = ['Fire', 'Ambulance', 'Accidant'];
+  List<String> arabicItems = ['حريق', 'اسعاف', 'حادث'];
   String selectedItem = 'Fire';
   @override
   Widget build(BuildContext context) {
@@ -90,42 +91,47 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ],
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.emergency,
-                color: Colors.red,
-              ),
-              title: DropdownButton(
-                value: selectedItem,
-                onChanged: (String? item) => setState(() => {
-                      selectedItem = item!,
-                      print(selectedItem),
-                    }),
-                items: items
-                    .map(
-                      (item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide:
+                              const BorderSide(width: 1, color: Colors.grey))),
+                  value: selectedItem,
+                  onChanged: (String? item) => setState(() => {
+                        selectedItem = item!,
+                        print(selectedItem),
+                      }),
+                  items: items
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            arabicItems[items.indexOf(item)],
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
 
-                // [
-                //   DropdownMenuItem(
-                //     value: 'Fire',
-                //     child: Text(Strings.Fire.toString()),
-                //   ),
-                //   DropdownMenuItem(
-                //     value: 'Accidant',
-                //     child: Text(Strings.Accidant.toString()),
-                //   ),
-                //   DropdownMenuItem(
-                //     value: 'Ambulance',
-                //     child: Text(Strings.Ambulance.toString()),
-                //   ),
-                // ]
+                  // [
+                  //   DropdownMenuItem(
+                  //     value: 'Fire',
+                  //     child: Text(Strings.Fire.toString()),
+                  //   ),
+                  //   DropdownMenuItem(
+                  //     value: 'Accidant',
+                  //     child: Text(Strings.Accidant.toString()),
+                  //   ),
+                  //   DropdownMenuItem(
+                  //     value: 'Ambulance',
+                  //     child: Text(Strings.Ambulance.toString()),
+                  //   ),
+                  // ]
+                ),
               ),
             ),
             Padding(
@@ -143,11 +149,11 @@ class _ReportScreenState extends State<ReportScreen> {
                       desc: desc.text,
                       type: selectedItem,
                       state: 'pending',
-                      longitude: _reportConteroller.latitude.value.toString(),
-                      latitude: _reportConteroller.longitude.value.toString(),
+                      longitude: _reportConteroller.longitude.value.toString(),
+                      latitude: _reportConteroller.latitude.value.toString(),
                     );
                     print(model.toRawJson());
-                    // _reportConteroller.create(model);
+                    _reportConteroller.create(model);
                   },
                   child: Text(
                     Strings.sendReport,
