@@ -37,5 +37,13 @@ class Strings {
   static String logout = 'تسجيل الخروج';
 
   static String myAccount = 'حسابي';
+
+  static String fullName = 'الأسم الكامل';
+
+  static String location = 'موقعي على الخريطة';
+
+  static String edit = 'تعديل';
+
+  static String save = 'حفظ';
   // ------------------------------------------------------------------------ //
 }

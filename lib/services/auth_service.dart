@@ -47,5 +47,26 @@ class AuthService extends GetConnect {
       return null;
     }
   }
+
+  // -------------------------------------------------------------------------- //
+  // create citizen account
+  Future<Response?> update(
+      int id, CitizenRequestModel model, String token) async {
+    final response = await patch(
+      "$url$path/$id",
+      model.toJson(),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    // todo fix parial problem -> fixed
+    //fix phone number comes with +218
+    if (response.statusCode == HttpStatus.ok) {
+      return response;
+    } else {
+      return null;
+    }
+  }
+
   // -------------------------------------------------------------------------- //
 }

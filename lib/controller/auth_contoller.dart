@@ -16,6 +16,15 @@ class AuthController extends GetxController {
   RxBool isCitizenCreated = false.obs;
   RxDouble citizenLatitude = 0.0.obs;
   RxDouble citizenLongitude = 0.0.obs;
+  // listen to citizen values //
+  RxString firstName = ''.obs;
+  RxString lastName = ''.obs;
+  RxString username = ''.obs;
+  RxString email = ''.obs;
+  RxString phone = ''.obs;
+  RxString city = ''.obs;
+  RxString latitude = ''.obs;
+  RxString longitude = ''.obs;
 
   @override
   void onInit() {
@@ -71,15 +80,51 @@ class AuthController extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // create citizen
-  Future<void> findOne() async {
+  Future<CitizenResponseModel?> findOne() async {
     int id =
         _authManager.getUserIdFromToken(_authManager.getAuthToken().toString());
     final response =
         await _authService.findOne(id, _authManager.getAuthToken().toString());
     print(response.runtimeType);
     if (response != null) {
-      _authManager.storeCitizenData(response);
-      print(_authManager.getCitizenData());
+      // _authManager
+      //     .storeCitizenData(CitizenResponseModel.fromJson(response.toJson()));
+      firstName.value = response.firstName;
+      lastName.value = response.lastName;
+      email.value = response.email;
+      username.value = response.username;
+      phone.value = response.phone;
+      city.value = response.city;
+      latitude.value = response.latitude;
+      longitude.value = response.longitude;
+      return response;
+    } else {
+      /// Show user a dialog about the error response
+      Get.defaultDialog(
+          middleText: 'some thing wrong',
+          textConfirm: 'OK',
+          confirmTextColor: Colors.white,
+          onConfirm: () {
+            Get.back();
+          });
+
+      return null;
+    }
+  }
+
+  // ------------------------------------------------------------------------ //
+  // create citizen
+  Future<void> updateOne(
+    CitizenRequestModel citizenRequestModel,
+  ) async {
+    int id =
+        _authManager.getUserIdFromToken(_authManager.getAuthToken().toString());
+    final response = await _authService.update(
+        id, citizenRequestModel, _authManager.getAuthToken().toString());
+
+    print(response.toString());
+    if (response != null) {
+      print(response.body);
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

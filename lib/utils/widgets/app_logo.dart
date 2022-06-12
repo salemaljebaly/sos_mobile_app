@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sos_mobile_app/theme/colors.dart';
 
@@ -20,7 +21,7 @@ class AppLogo extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        SvgPicture.asset(
+        Image.asset(
           logo,
           width: 100,
         ),
@@ -33,8 +34,7 @@ class AppLogo extends StatelessWidget {
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
                     mainTitle,
-                    style: const TextStyle(
-                        color: AppColors.primaryDark, fontSize: 16),
+                    style: const TextStyle(color: Colors.red, fontSize: 16),
                   ),
                 ),
                 Padding(

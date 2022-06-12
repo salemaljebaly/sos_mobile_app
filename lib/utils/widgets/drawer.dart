@@ -26,10 +26,10 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-              currentAccountPicture:
-                  SvgPicture.asset('assets/icons/sos_logo.svg'),
-              accountName: Text('fullname'),
-              accountEmail: Text('email')),
+            currentAccountPicture: Image.asset('assets/icons/logo.png'),
+            accountName: Text('fullname'),
+            accountEmail: Text('email'),
+          ),
           ListTile(
             leading: const Icon(
               Icons.person_rounded,

@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
             AppLogo(
                 mainTitle: Strings.appName,
                 subTitle: '----------',
-                logo: 'assets/icons/sos_logo.svg'),
+                logo: 'assets/icons/logo.png'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: _formType == FormType.login ? loginForm() : registerForm(),
@@ -161,30 +161,38 @@ class _LoginScreenState extends State<LoginScreen> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       key: formKey,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextFormField(
-          controller: firstName,
-          validator: (value) {
-            return (value == null || value.isEmpty)
-                ? Strings.emptyUsername
-                : null;
-          },
-          decoration: InputDecoration(
-            label: Text(Strings.firstName),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          controller: lastName,
-          validator: (value) {
-            return (value == null || value.isEmpty)
-                ? Strings.emptyUsername
-                : null;
-          },
-          decoration: InputDecoration(
-            label: Text(Strings.lastName),
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: firstName,
+                validator: (value) {
+                  return (value == null || value.isEmpty)
+                      ? Strings.emptyUsername
+                      : null;
+                },
+                decoration: InputDecoration(
+                  label: Text(Strings.firstName),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: TextFormField(
+                controller: lastName,
+                validator: (value) {
+                  return (value == null || value.isEmpty)
+                      ? Strings.emptyUsername
+                      : null;
+                },
+                decoration: InputDecoration(
+                  label: Text(Strings.lastName),
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 8,
