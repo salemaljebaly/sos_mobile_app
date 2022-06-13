@@ -32,6 +32,7 @@ class Strings {
   static String mustBePhone = 'يجب ادخال هاتف مثل : 914034745';
   // ------------------------------------------------------------------------ //
   static String reports = 'التقارير';
+  static String report = 'بلاغ';
   static String policeOffices = 'مراكز الشرطة';
   static String about = 'حول';
   static String logout = 'تسجيل الخروج';
@@ -62,5 +63,7 @@ class Strings {
   static String reportDesc = 'تفاصيل البلاغ';
 
   static String reportSent = 'تم تقديم البلاغ';
+
+  static String reports_history = 'سجل التقارير';
   // ------------------------------------------------------------------------ //
 }

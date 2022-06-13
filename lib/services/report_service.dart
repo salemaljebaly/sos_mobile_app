@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sos_mobile_app/controller/cache_token.dart';
 import 'package:sos_mobile_app/model/report.dart';
+import 'package:sos_mobile_app/model/report_response.dart';
 
 class ReportService extends GetConnect {
   final String url = dotenv.env['API_URL'] as String;
@@ -65,7 +68,7 @@ class ReportService extends GetConnect {
 
   // -------------------------------------------------------------------------- //
   // update reports
-  Future<List<Report>?> findAll() async {
+  Future<List<Response>?> findAll() async {
     final response = await get(
       "$url$path/user",
       headers: {
@@ -75,8 +78,8 @@ class ReportService extends GetConnect {
     // todo fix parial problem -> fixed
     //fix phone number comes with +218
     if (response.statusCode == HttpStatus.ok) {
+      // print(response.body);
       print(response.body);
-      return response.body as List<Report>;
     } else {
       return null;
     }

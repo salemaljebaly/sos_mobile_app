@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final reportResponse = reportResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 class ReportResponse {
@@ -23,8 +19,8 @@ class ReportResponse {
   String desc;
   String type;
   String state;
-  DateTime createdAt;
-  DateTime updateAt;
+  String createdAt;
+  String updateAt;
   String longitude;
   String latitude;
   dynamic reportFilePath;
@@ -41,8 +37,8 @@ class ReportResponse {
         desc: json["desc"],
         type: json["type"],
         state: json["state"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updateAt: DateTime.parse(json["updateAt"]),
+        createdAt: json["createdAt"],
+        updateAt: json["updateAt"],
         longitude: json["longitude"],
         latitude: json["latitude"],
         reportFilePath: json["reportFilePath"],
@@ -55,8 +51,8 @@ class ReportResponse {
         "desc": desc,
         "type": type,
         "state": state,
-        "createdAt": createdAt.toIso8601String(),
-        "updateAt": updateAt.toIso8601String(),
+        "createdAt": createdAt,
+        "updateAt": updateAt,
         "longitude": longitude,
         "latitude": latitude,
         "reportFilePath": reportFilePath,
@@ -89,7 +85,7 @@ class Reporter {
   String phone;
   String password;
   bool isActive;
-  DateTime createdAt;
+  String createdAt;
   String city;
   String longitude;
   String latitude;
@@ -108,7 +104,7 @@ class Reporter {
         phone: json["phone"],
         password: json["password"],
         isActive: json["isActive"],
-        createdAt: DateTime.parse(json["createdAt"]),
+        createdAt: json["createdAt"],
         city: json["city"],
         longitude: json["longitude"],
         latitude: json["latitude"],
@@ -123,7 +119,7 @@ class Reporter {
         "phone": phone,
         "password": password,
         "isActive": isActive,
-        "createdAt": createdAt.toIso8601String(),
+        "createdAt": createdAt,
         "city": city,
         "longitude": longitude,
         "latitude": latitude,

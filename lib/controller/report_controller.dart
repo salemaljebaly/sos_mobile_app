@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/model/report.dart';
+import 'package:sos_mobile_app/model/report_response.dart';
 import 'package:sos_mobile_app/services/report_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 
@@ -16,7 +17,7 @@ class ReportConteroller extends GetxController {
   RxString latitude = ''.obs;
   RxString longitude = ''.obs;
   RxInt reportCount = 0.obs;
-  RxList<Report> reports = <Report>[].obs;
+  // RxList<ReportResponse> reports = <ReportResponse>[].obs;
 
   @override
   void onInit() {
@@ -32,8 +33,15 @@ class ReportConteroller extends GetxController {
 
     print(response.toString());
     if (response != null) {
-      Get.snackbar(Strings.reports, Strings.reportSent,
-          icon: const Icon(Icons.local_police));
+      // show snackbar
+      Get.snackbar(
+        Strings.report,
+        Strings.reportSent,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+        duration: const Duration(seconds: 1),
+        icon: const Icon(Icons.local_police),
+      );
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
@@ -100,12 +108,12 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // get all  report
-  Future<List<Report>> findAll() async {
+  Future<List<Response>> findAll() async {
     final response = await _reportService.findAll();
 
     print(response.toString());
     if (response != null) {
-      reports.value = response;
+      // reports.value = response;
       return response;
     } else {
       /// Show user a dialog about the error response

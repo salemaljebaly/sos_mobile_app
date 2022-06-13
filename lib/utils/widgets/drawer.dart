@@ -38,7 +38,7 @@ class AppDrawer extends StatelessWidget {
             title: Text(Strings.myAccount),
             onTap: () {
               _authController.findOne();
-              Get.toNamed(Routes.CITIZEN);
+              Get.offAndToNamed(Routes.CITIZEN);
             },
           ),
           ListTile(
@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(Strings.reports),
             onTap: () {
-              Get.toNamed(Routes.REPORT);
+              Get.offAndToNamed(Routes.REPORT);
             },
           ),
           ListTile(
@@ -56,9 +56,9 @@ class AppDrawer extends StatelessWidget {
               Icons.history_toggle_off_rounded,
               color: Colors.red,
             ),
-            title: Text(Strings.reports),
+            title: Text(Strings.reports_history),
             onTap: () {
-              Get.toNamed(Routes.REPORT_HISTORY);
+              Get.offAndToNamed(Routes.REPORT_HISTORY);
             },
           ),
           ListTile(
