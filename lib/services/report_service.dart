@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sos_mobile_app/controller/cache_token.dart';
+import 'package:sos_mobile_app/model/create_report_response.dart';
 import 'package:sos_mobile_app/model/report.dart';
 import 'package:sos_mobile_app/model/report_response.dart';
 
@@ -14,7 +15,7 @@ class ReportService extends GetConnect {
   final GetStorage token = GetStorage();
   // -------------------------------------------------------------------------- //
   // create citizen account
-  Future<Response?> create(Report model) async {
+  Future<CreateReportResponse?> create(Report model) async {
     final response = await post(
       "$url$path",
       model.toJson(),
@@ -24,7 +25,7 @@ class ReportService extends GetConnect {
     );
     print(response.body);
     if (response.statusCode == HttpStatus.created) {
-      return response;
+      return response.body;
     } else {
       return null;
     }
@@ -75,6 +76,8 @@ class ReportService extends GetConnect {
         'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
       },
     );
+
+    print('${token.read(CacheTokenKey.token.toString())}');
     // todo fix parial problem -> fixed
     //fix phone number comes with +218
     if (response.statusCode == HttpStatus.ok) {

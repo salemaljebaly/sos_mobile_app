@@ -17,7 +17,7 @@ class _ReportHistoryState extends State<ReportHistory> {
   @override
   void initState() {
     _reportConteroller.count();
-    // _reportConteroller.findAll();
+    _reportConteroller.findAll();
     // TODO: implement initState
     super.initState();
   }

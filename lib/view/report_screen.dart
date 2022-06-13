@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sos_mobile_app/controller/auth_contoller.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sos_mobile_app/controller/report_controller.dart';
 import 'package:sos_mobile_app/model/report.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
@@ -18,6 +19,24 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
+  // --------------------------------------------------------------------------- //
+  File? image;
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+      setState(() {
+        this.image = imageTemp;
+        print('image' + image.toString());
+      });
+    } on PlatformException catch (e) {
+      print('failed to pick file: $e');
+    }
+  }
+
+  // --------------------------------------------------------------------------- //
   late Report model;
   final ReportConteroller _reportConteroller = Get.put(ReportConteroller());
   TextEditingController desc = TextEditingController();
@@ -116,22 +135,31 @@ class _ReportScreenState extends State<ReportScreen> {
                         ),
                       )
                       .toList(),
-
-                  // [
-                  //   DropdownMenuItem(
-                  //     value: 'Fire',
-                  //     child: Text(Strings.Fire.toString()),
-                  //   ),
-                  //   DropdownMenuItem(
-                  //     value: 'Accidant',
-                  //     child: Text(Strings.Accidant.toString()),
-                  //   ),
-                  //   DropdownMenuItem(
-                  //     value: 'Ambulance',
-                  //     child: Text(Strings.Ambulance.toString()),
-                  //   ),
-                  // ]
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: buildButton(
+                      icon: Icons.image_outlined,
+                      title: 'صورة مخزنة',
+                      onClicked: () => pickImage(ImageSource.gallery),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: buildButton(
+                      icon: Icons.camera_outlined,
+                      title: 'التقاط صورة',
+                      onClicked: () => pickImage(ImageSource.camera),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -167,4 +195,33 @@ class _ReportScreenState extends State<ReportScreen> {
       ),
     );
   }
+
+  Widget buildButton({
+    required String title,
+    required IconData icon,
+    required VoidCallback onClicked,
+  }) =>
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(58),
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          textStyle: GoogleFonts.almarai(
+            fontSize: 14,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 28,
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Text(title)
+          ],
+        ),
+        onPressed: onClicked,
+      );
 }

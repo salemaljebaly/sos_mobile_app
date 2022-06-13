@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
+import 'package:sos_mobile_app/model/create_report_response.dart';
 import 'package:sos_mobile_app/model/report.dart';
 import 'package:sos_mobile_app/model/report_response.dart';
 import 'package:sos_mobile_app/services/report_service.dart';
@@ -28,7 +29,7 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // create report
-  Future<void> create(Report model) async {
+  Future<int?> create(Report model) async {
     final response = await _reportService.create(model);
 
     print(response.toString());
@@ -42,6 +43,7 @@ class ReportConteroller extends GetxController {
         duration: const Duration(seconds: 1),
         icon: const Icon(Icons.local_police),
       );
+      return response.id;
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
@@ -52,6 +54,7 @@ class ReportConteroller extends GetxController {
           onConfirm: () {
             Get.back();
           });
+      return null;
     }
   }
 
@@ -153,9 +156,7 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // get all  report
-  Future<int> upload(int id) async {
-    // pick image from gellary
-    final data = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<int> upload(int id, dynamic data) async {
     final response = await _reportService.upload(id, data);
 
     print(response.toString());
