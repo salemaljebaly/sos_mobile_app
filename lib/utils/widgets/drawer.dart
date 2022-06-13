@@ -6,6 +6,7 @@ import 'package:sos_mobile_app/routes/app_pages.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/login_screen.dart';
+import 'package:sos_mobile_app/view/report_history_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   AppDrawer({Key? key}) : super(key: key);
@@ -48,6 +49,16 @@ class AppDrawer extends StatelessWidget {
             title: Text(Strings.reports),
             onTap: () {
               Get.toNamed(Routes.REPORT);
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.history_toggle_off_rounded,
+              color: Colors.red,
+            ),
+            title: Text(Strings.reports),
+            onTap: () {
+              Get.toNamed(Routes.REPORT_HISTORY);
             },
           ),
           ListTile(

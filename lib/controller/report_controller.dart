@@ -15,6 +15,8 @@ class ReportConteroller extends GetxController {
   RxString reportType = ''.obs;
   RxString latitude = ''.obs;
   RxString longitude = ''.obs;
+  RxInt reportCount = 0.obs;
+  RxList<Report> reports = <Report>[].obs;
 
   @override
   void onInit() {
@@ -30,7 +32,8 @@ class ReportConteroller extends GetxController {
 
     print(response.toString());
     if (response != null) {
-      print(response.body);
+      Get.snackbar(Strings.reports, Strings.reportSent,
+          icon: const Icon(Icons.local_police));
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
@@ -102,7 +105,8 @@ class ReportConteroller extends GetxController {
 
     print(response.toString());
     if (response != null) {
-      print(response);
+      reports.value = response;
+      return response;
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
@@ -119,12 +123,12 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // count reports
-  Future<int> count() async {
+  Future<int?> count() async {
     final response = await _reportService.count();
 
-    print(response.toString());
     if (response != null) {
-      print(response);
+      reportCount.value = response;
+      return response;
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

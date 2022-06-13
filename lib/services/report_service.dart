@@ -75,7 +75,8 @@ class ReportService extends GetConnect {
     // todo fix parial problem -> fixed
     //fix phone number comes with +218
     if (response.statusCode == HttpStatus.ok) {
-      return response.body;
+      print(response.body);
+      return response.body as List<Report>;
     } else {
       return null;
     }
@@ -91,7 +92,7 @@ class ReportService extends GetConnect {
       },
     );
     if (response.statusCode == HttpStatus.ok) {
-      return response.body;
+      return int.parse(response.body);
     } else {
       return null;
     }
