@@ -33,7 +33,7 @@ class Strings {
   // ------------------------------------------------------------------------ //
   static String reports = 'التقارير';
   static String report = 'بلاغ';
-  static String policeOffices = 'مراكز الشرطة';
+  static String policeOffices = 'مراكز البلاغات';
   static String about = 'حول';
   static String logout = 'تسجيل الخروج';
 
@@ -65,5 +65,7 @@ class Strings {
   static String reportSent = 'تم تقديم البلاغ';
 
   static String reports_history = 'سجل التقارير';
+
+  static String pressToNavigate = 'اضغط على مركز البلاغ للانتقال إلى الخريطة';
   // ------------------------------------------------------------------------ //
 }
