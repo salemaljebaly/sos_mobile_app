@@ -31,7 +31,7 @@ class CitizenScreen extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text(Strings.appName),
+        title: Text(Strings.myAccount, style: const TextStyle(fontSize: 16)),
       ),
       body: Obx(
         () => PageView(

@@ -49,7 +49,7 @@ class _ReportScreenState extends State<ReportScreen> {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text(Strings.appName),
+        title: Text(Strings.createReport, style: const TextStyle(fontSize: 16)),
       ),
       body: SingleChildScrollView(
         child: Padding(

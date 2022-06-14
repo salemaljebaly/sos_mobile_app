@@ -22,13 +22,13 @@ class AppDrawer extends StatelessWidget {
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.grey,
+          Container(
+            color: Colors.grey,
+            height: 180,
+            child: Image.asset(
+              'assets/icons/logo.png',
+              scale: 15,
             ),
-            currentAccountPicture: Image.asset('assets/icons/logo.png'),
-            accountName: Text('fullname'),
-            accountEmail: Text('email'),
           ),
           ListTile(
             leading: const Icon(
