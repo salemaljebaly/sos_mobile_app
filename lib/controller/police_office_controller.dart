@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/model/police_offices.dart';
-import 'package:sos_mobile_app/services/polic_service.dart';
+import 'package:sos_mobile_app/services/police_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 
 class PoliceOfficeConteroller extends GetxController {

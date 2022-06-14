@@ -1,3 +1,7 @@
+// To parserequired this JSON data, do
+//
+//     final createReportResponse = createReportResponseFromJson(jsonString);
+
 import 'dart:convert';
 
 class CreateReportResponse {
@@ -65,11 +69,23 @@ class CreateReportResponse {
 class Reporter {
   Reporter({
     required this.id,
+    required this.firstName,
+    required this.lastName,
     required this.username,
+    required this.email,
+    required this.phone,
+    required this.isActive,
+    required this.city,
   });
 
   int id;
+  String firstName;
+  String lastName;
   String username;
+  String email;
+  String phone;
+  bool isActive;
+  String city;
 
   factory Reporter.fromRawJson(String str) =>
       Reporter.fromJson(json.decode(str));
@@ -78,11 +94,23 @@ class Reporter {
 
   factory Reporter.fromJson(Map<String, dynamic> json) => Reporter(
         id: json["id"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
         username: json["username"],
+        email: json["email"],
+        phone: json["phone"],
+        isActive: json["isActive"],
+        city: json["city"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
         "username": username,
+        "email": email,
+        "phone": phone,
+        "isActive": isActive,
+        "city": city,
       };
 }

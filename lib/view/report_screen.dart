@@ -51,146 +51,149 @@ class _ReportScreenState extends State<ReportScreen> {
       appBar: AppBar(
         title: Text(Strings.appName),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Icon(
-                Icons.file_open_rounded,
-                size: 100,
-                color: Colors.red,
-              ),
-            ),
-            Text(
-              Strings.sendReport,
-              style: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 20.0),
-            Row(
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: TextFormField(
-                    controller: desc,
-                    validator: (value) {
-                      return (value == null || value.isEmpty)
-                          ? Strings.emptyUsername
-                          : null;
-                    },
-                    decoration: InputDecoration(
-                      label: Text(Strings.reportDesc),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      // convert to getx dialog and fix width
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return const AlertDialog(
-                              contentPadding: EdgeInsets.all(0),
-                              content: CurrentLocationScreen(),
-                            );
-                          });
-                    },
-                    icon: const Icon(Icons.location_on_sharp),
-                    label: const Text('الموقع'),
-                  ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-              ],
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
-                child: DropdownButtonFormField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide:
-                              const BorderSide(width: 1, color: Colors.grey))),
-                  value: selectedItem,
-                  onChanged: (String? item) => setState(() => {
-                        selectedItem = item!,
-                        print(selectedItem),
-                      }),
-                  items: items
-                      .map(
-                        (item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            arabicItems[items.indexOf(item)],
-                          ),
-                        ),
-                      )
-                      .toList(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Icon(
+                  Icons.file_open_rounded,
+                  size: 100,
+                  color: Colors.red,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
+              Text(
+                Strings.sendReport,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 20.0),
+              Row(
                 children: [
                   Expanded(
-                    child: buildButton(
-                      icon: Icons.image_outlined,
-                      title: 'صورة مخزنة',
-                      onClicked: () => pickImage(ImageSource.gallery),
+                    flex: 4,
+                    child: TextFormField(
+                      controller: desc,
+                      validator: (value) {
+                        return (value == null || value.isEmpty)
+                            ? Strings.emptyUsername
+                            : null;
+                      },
+                      decoration: InputDecoration(
+                        label: Text(Strings.reportDesc),
+                      ),
                     ),
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 4,
                   ),
                   Expanded(
-                    child: buildButton(
-                      icon: Icons.camera_outlined,
-                      title: 'التقاط صورة',
-                      onClicked: () => pickImage(ImageSource.camera),
+                    flex: 2,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        // convert to getx dialog and fix width
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return const AlertDialog(
+                                contentPadding: EdgeInsets.all(0),
+                                content: CurrentLocationScreen(),
+                              );
+                            });
+                      },
+                      icon: const Icon(Icons.location_on_sharp),
+                      label: const Text('الموقع'),
                     ),
+                  ),
+                  const SizedBox(
+                    width: 4,
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SizedBox(
+              SizedBox(
                 width: double.infinity,
-                height: 58.0,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(width: 1.0, color: Colors.red),
-                  ),
-                  onPressed: () async {
-                    //  TODO fix request
-                    model = Report(
-                      desc: desc.text,
-                      type: selectedItem,
-                      state: 'pending',
-                      longitude: _reportConteroller.longitude.value.toString(),
-                      latitude: _reportConteroller.latitude.value.toString(),
-                    );
-                    print(model.toRawJson());
-                    _reportConteroller.create(model);
-                  },
-                  child: Text(
-                    Strings.sendReport,
-                    style: const TextStyle(color: Colors.red),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                                width: 1, color: Colors.grey))),
+                    value: selectedItem,
+                    onChanged: (String? item) => setState(() => {
+                          selectedItem = item!,
+                          print(selectedItem),
+                        }),
+                    items: items
+                        .map(
+                          (item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              arabicItems[items.indexOf(item)],
+                            ),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: buildButton(
+                        icon: Icons.image_outlined,
+                        title: 'صورة مخزنة',
+                        onClicked: () => pickImage(ImageSource.gallery),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: buildButton(
+                        icon: Icons.camera_outlined,
+                        title: 'التقاط صورة',
+                        onClicked: () => pickImage(ImageSource.camera),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 58.0,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(width: 1.0, color: Colors.red),
+                    ),
+                    onPressed: () async {
+                      //  TODO fix request
+                      model = Report(
+                        desc: desc.text,
+                        type: selectedItem,
+                        state: 'pending',
+                        longitude:
+                            _reportConteroller.longitude.value.toString(),
+                        latitude: _reportConteroller.latitude.value.toString(),
+                      );
+                      print(model.toRawJson());
+                      _reportConteroller.create(model);
+                    },
+                    child: Text(
+                      Strings.sendReport,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

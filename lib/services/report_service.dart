@@ -69,7 +69,7 @@ class ReportService extends GetConnect {
 
   // -------------------------------------------------------------------------- //
   // update reports
-  Future<List<Response>?> findAll() async {
+  Future<List<ReportResponse>?> findAll() async {
     final response = await get(
       "$url$path/user",
       headers: {
@@ -77,12 +77,11 @@ class ReportService extends GetConnect {
       },
     );
 
-    print('${token.read(CacheTokenKey.token.toString())}');
-    // todo fix parial problem -> fixed
-    //fix phone number comes with +218
     if (response.statusCode == HttpStatus.ok) {
-      // print(response.body);
-      print(response.body);
+      List<ReportResponse> reportResponse = <ReportResponse>[];
+      reportResponse.addAll(
+          List.from(response.body).map((e) => ReportResponse.fromJson(e)));
+      return reportResponse;
     } else {
       return null;
     }

@@ -67,5 +67,9 @@ class Strings {
   static String reports_history = 'سجل التقارير';
 
   static String pressToNavigate = 'اضغط على مركز البلاغ للانتقال إلى الخريطة';
+
+  static String pending = 'قيد الانتضار';
+  static String processing = 'قيد المعالجة';
+  static String done = 'تم التعامل مع التقرير';
   // ------------------------------------------------------------------------ //
 }

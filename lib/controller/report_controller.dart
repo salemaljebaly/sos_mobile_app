@@ -18,7 +18,7 @@ class ReportConteroller extends GetxController {
   RxString latitude = ''.obs;
   RxString longitude = ''.obs;
   RxInt reportCount = 0.obs;
-  // RxList<ReportResponse> reports = <ReportResponse>[].obs;
+  RxList<ReportResponse> reports = <ReportResponse>[].obs;
 
   @override
   void onInit() {
@@ -111,12 +111,13 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // get all  report
-  Future<List<Response>> findAll() async {
+  Future<List<ReportResponse>> findAll() async {
     final response = await _reportService.findAll();
 
     print(response.toString());
     if (response != null) {
-      // reports.value = response;
+      reportCount.value = response.length;
+      reports.value = response;
       return response;
     } else {
       /// Show user a dialog about the error response

@@ -69,7 +69,6 @@ class Reporter {
     required this.username,
     required this.email,
     required this.phone,
-    required this.password,
     required this.isActive,
     required this.createdAt,
     required this.city,
@@ -83,7 +82,6 @@ class Reporter {
   String username;
   String email;
   String phone;
-  String password;
   bool isActive;
   String createdAt;
   String city;
@@ -102,7 +100,6 @@ class Reporter {
         username: json["username"],
         email: json["email"],
         phone: json["phone"],
-        password: json["password"],
         isActive: json["isActive"],
         createdAt: json["createdAt"],
         city: json["city"],
@@ -117,7 +114,6 @@ class Reporter {
         "username": username,
         "email": email,
         "phone": phone,
-        "password": password,
         "isActive": isActive,
         "createdAt": createdAt,
         "city": city,
