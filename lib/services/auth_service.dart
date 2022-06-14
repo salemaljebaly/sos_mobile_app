@@ -42,6 +42,7 @@ class AuthService extends GetConnect {
       },
     );
 
+    print(response.body);
     if (response.statusCode == HttpStatus.ok) {
       return CitizenResponseModel.fromJson(response.body);
     } else {

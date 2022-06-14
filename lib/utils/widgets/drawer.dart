@@ -67,7 +67,9 @@ class AppDrawer extends StatelessWidget {
               color: Colors.red,
             ),
             title: Text(Strings.policeOffices),
-            onTap: () {},
+            onTap: () {
+              Get.offAndToNamed(Routes.POLICE_OFFICES);
+            },
           ),
           ListTile(
             leading: const Icon(

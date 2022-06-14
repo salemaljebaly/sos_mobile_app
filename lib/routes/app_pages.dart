@@ -3,6 +3,7 @@ import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
 import 'package:sos_mobile_app/view/login_screen.dart';
+import 'package:sos_mobile_app/view/police_offices.dart';
 import 'package:sos_mobile_app/view/report_history_screen.dart';
 import 'package:sos_mobile_app/view/report_screen.dart';
 
@@ -34,7 +35,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.POLICE_OFFICES,
-      page: () => HomeScreen(title: Strings.appName),
+      page: () => const PoliceOfficeScreen(),
     ),
     GetPage(
       name: Routes.ABOUT,

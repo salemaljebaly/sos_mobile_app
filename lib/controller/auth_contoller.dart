@@ -85,7 +85,6 @@ class AuthController extends GetxController {
         _authManager.getUserIdFromToken(_authManager.getAuthToken().toString());
     final response =
         await _authService.findOne(id, _authManager.getAuthToken().toString());
-    print(response.runtimeType);
     if (response != null) {
       // _authManager
       //     .storeCitizenData(CitizenResponseModel.fromJson(response.toJson()));
