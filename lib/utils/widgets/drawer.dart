@@ -38,7 +38,7 @@ class AppDrawer extends StatelessWidget {
             title: Text(Strings.myAccount),
             onTap: () {
               _authController.findOne();
-              Get.offAndToNamed(Routes.CITIZEN);
+              Get.offNamed(Routes.CITIZEN);
             },
           ),
           ListTile(
@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(Strings.reports),
             onTap: () {
-              Get.offAndToNamed(Routes.REPORT);
+              Get.offNamed(Routes.REPORT);
             },
           ),
           ListTile(
@@ -58,7 +58,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(Strings.reports_history),
             onTap: () {
-              Get.offAndToNamed(Routes.REPORT_HISTORY);
+              Get.offNamed(Routes.REPORT_HISTORY);
             },
           ),
           ListTile(
@@ -68,7 +68,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(Strings.policeOffices),
             onTap: () {
-              Get.offAndToNamed(Routes.POLICE_OFFICES);
+              Get.offNamed(Routes.POLICE_OFFICES);
             },
           ),
           ListTile(
@@ -77,7 +77,9 @@ class AppDrawer extends StatelessWidget {
               color: Colors.red,
             ),
             title: Text(Strings.about),
-            onTap: () {},
+            onTap: () {
+              Get.offNamed(Routes.ABOUT);
+            },
           ),
           ListTile(
             leading: const Icon(

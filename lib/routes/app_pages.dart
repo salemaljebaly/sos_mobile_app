@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/view/about_screen.dart';
 import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
 import 'package:sos_mobile_app/view/login_screen.dart';
@@ -39,7 +40,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.ABOUT,
-      page: () => HomeScreen(title: Strings.appName),
+      page: () => const AboutScreen(),
     ),
   ];
 }
