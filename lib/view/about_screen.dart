@@ -26,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         title: Text(
           Strings.about,
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
       ),
       body: Obx(
