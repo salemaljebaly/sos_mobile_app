@@ -9,23 +9,44 @@ import 'package:sos_mobile_app/utils/widgets/drawer.dart';
 import 'package:sos_mobile_app/view/current_location_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CitizenScreen extends StatelessWidget {
+class CitizenScreen extends StatefulWidget {
   CitizenScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CitizenScreen> createState() => _CitizenScreenState();
+}
+
+class _CitizenScreenState extends State<CitizenScreen> {
   final box = GetStorage();
+
   final AuthController _authController = Get.put(AuthController());
 
   // ------------------------------------------------------------------------ //
   TextEditingController firstName = TextEditingController();
 
   TextEditingController lastName = TextEditingController();
+
   TextEditingController username = TextEditingController();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
   TextEditingController city = TextEditingController();
+
   TextEditingController phone = TextEditingController();
+
   late CitizenRequestModel citizenRequestModel;
+
   // ------------------------------------------------------------------------ //
   final PageController _pageController = PageController();
+  // ------------------------------------------------------------------------ //
+  @override
+  void initState() {
+    _authController.findOne();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,8 +148,6 @@ class CitizenScreen extends StatelessWidget {
   }
 
   // ---------------------------------------------------------------------------------- //
-  // ------------------------------------------------------------------------------- //
-  // login form
   Form registerForm(BuildContext context) {
     firstName.text = _authController.firstName.toString();
     lastName.text = _authController.lastName.toString();
@@ -298,5 +317,4 @@ class CitizenScreen extends StatelessWidget {
       ]),
     );
   }
-  // ----------------------------------------------------------------------------------- //
 }

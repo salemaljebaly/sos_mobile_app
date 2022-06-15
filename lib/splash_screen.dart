@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
+import 'package:sos_mobile_app/view/citizen_screen.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
 import 'package:sos_mobile_app/view/login_screen.dart';
 
@@ -12,7 +13,6 @@ class SplashScreen extends StatelessWidget {
   // --------------------------------------------------------------------------- //
   Future<void> initializeSettings() async {
     _authmanager.checkLoginSatus();
-    print('use state =' + _authmanager.isLogin.value.toString());
     await Future.delayed(const Duration(seconds: 1));
   }
   // --------------------------------------------------------------------------- //
@@ -29,9 +29,7 @@ class SplashScreen extends StatelessWidget {
             return errorView(snapshot);
           } else {
             return _authmanager.isLogin.value
-                ? HomeScreen(
-                    title: Strings.appName,
-                  )
+                ? CitizenScreen()
                 : const LoginScreen();
           }
         }
