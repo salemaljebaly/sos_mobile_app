@@ -1,7 +1,3 @@
-// To parserequired this JSON data, do
-//
-//     final createReportResponse = createReportResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 class CreateReportResponse {

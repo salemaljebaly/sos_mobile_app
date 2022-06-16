@@ -6,6 +6,7 @@ import 'package:sos_mobile_app/controller/auth_manager.dart';
 import 'package:sos_mobile_app/model/auth_request_model.dart';
 import 'package:sos_mobile_app/model/citizen_request_model.dart';
 import 'package:sos_mobile_app/model/citizen_response_model.dart';
+import 'package:sos_mobile_app/routes/app_pages.dart';
 import 'package:sos_mobile_app/services/auth_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
 import 'package:sos_mobile_app/view/home_screen.dart';
@@ -43,18 +44,18 @@ class AuthController extends GetxController {
     if (response != null) {
       isCitizenCreated.value = true;
       _authManager.saveToken(response.accessToken);
-      Get.to(() => HomeScreen(
-            title: Strings.appName,
-          ));
+      Get.offNamed(Routes.CITIZEN);
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
-          middleText: 'User not found!',
-          textConfirm: 'OK',
-          confirmTextColor: Colors.white,
-          onConfirm: () {
-            Get.back();
-          });
+        middleText: Strings.dontHaveAccount,
+        textConfirm: Strings.ok,
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.red[300],
+        onConfirm: () {
+          Get.back();
+        },
+      );
     }
   }
 
@@ -63,18 +64,18 @@ class AuthController extends GetxController {
   Future<void> createCitizen(CitizenRequestModel citizenRequestModel) async {
     final response = await _authService.create(citizenRequestModel);
 
-    print(response.toString());
     if (response != null) {
-      print(response.body);
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
-          middleText: 'some thing wrong',
-          textConfirm: 'OK',
-          confirmTextColor: Colors.white,
-          onConfirm: () {
-            Get.back();
-          });
+        middleText: Strings.someThingWrong,
+        textConfirm: Strings.ok,
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.red[300],
+        onConfirm: () {
+          Get.back();
+        },
+      );
     }
   }
 
@@ -100,12 +101,14 @@ class AuthController extends GetxController {
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
-          middleText: 'some thing wrong',
-          textConfirm: 'OK',
-          confirmTextColor: Colors.white,
-          onConfirm: () {
-            Get.back();
-          });
+        middleText: Strings.someThingWrong,
+        textConfirm: Strings.ok,
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.red[300],
+        onConfirm: () {
+          Get.back();
+        },
+      );
 
       return null;
     }
@@ -121,18 +124,18 @@ class AuthController extends GetxController {
     final response = await _authService.update(
         id, citizenRequestModel, _authManager.getAuthToken().toString());
 
-    print(response.toString());
     if (response != null) {
-      print(response.body);
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
-          middleText: 'some thing wrong',
-          textConfirm: 'OK',
-          confirmTextColor: Colors.white,
-          onConfirm: () {
-            Get.back();
-          });
+        middleText: Strings.someThingWrong,
+        textConfirm: Strings.ok,
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.red[300],
+        onConfirm: () {
+          Get.back();
+        },
+      );
     }
   }
 

@@ -139,30 +139,30 @@ class _ReportScreenState extends State<ReportScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: buildButton(
-                        icon: Icons.image_outlined,
-                        title: 'صورة مخزنة',
-                        onClicked: () => pickImage(ImageSource.gallery),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: buildButton(
-                        icon: Icons.camera_outlined,
-                        title: 'التقاط صورة',
-                        onClicked: () => pickImage(ImageSource.camera),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(4.0),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: buildButton(
+              //           icon: Icons.image_outlined,
+              //           title: 'صورة مخزنة',
+              //           onClicked: () => pickImage(ImageSource.gallery),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 10,
+              //       ),
+              //       Expanded(
+              //         child: buildButton(
+              //           icon: Icons.camera_outlined,
+              //           title: 'التقاط صورة',
+              //           onClicked: () => pickImage(ImageSource.camera),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: SizedBox(
@@ -182,8 +182,13 @@ class _ReportScreenState extends State<ReportScreen> {
                             _reportConteroller.longitude.value.toString(),
                         latitude: _reportConteroller.latitude.value.toString(),
                       );
-                      print(model.toRawJson());
+
                       _reportConteroller.create(model);
+                      // Future.delayed(const Duration(seconds: 1));
+                      // print('id from report' +
+                      //     _reportConteroller.reportId.value.toString());
+                      // _reportConteroller.upload(
+                      //     _reportConteroller.reportId.value, this.image);
                     },
                     child: Text(
                       Strings.sendReport,

@@ -50,7 +50,9 @@ class SplashScreen extends StatelessWidget {
         children: const [
           Padding(
             padding: EdgeInsets.all(16.0),
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.redAccent,
+            ),
           ),
           Text('Loading...'),
         ],

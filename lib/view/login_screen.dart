@@ -41,8 +41,15 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: _formType == FormType.login
-            ? Text(Strings.login)
-            : Text(Strings.register),
+            ? Text(
+                Strings.login,
+                style: const TextStyle(fontSize: 16),
+              )
+            : Text(
+                Strings.register,
+                style: const TextStyle(fontSize: 16),
+              ),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -118,6 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         TextButton(
+          style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.red[300]),
+              foregroundColor: MaterialStateProperty.all(Colors.black38)),
           onPressed: () {
             setState(() {
               _formType = FormType.register;
@@ -266,6 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? Strings.emptyUsername
                       : null;
                 },
+                keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   label: Text(Strings.password),
                 ),
@@ -326,6 +337,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         TextButton(
+          style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.red[300]),
+              foregroundColor: MaterialStateProperty.all(Colors.black38)),
           onPressed: () {
             setState(() {
               _formType = FormType.login;

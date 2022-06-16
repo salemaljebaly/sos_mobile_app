@@ -13,7 +13,6 @@ class AuthService extends GetConnect {
   // -------------------------------------------------------------------------- //
   Future<AuthResponseModel?> login(AuthModel model) async {
     final response = await post("$url$path$authPath", model.toJson());
-    print(response.body);
     if (response.statusCode == HttpStatus.created) {
       return AuthResponseModel.fromJson(response.body);
     } else {
@@ -42,7 +41,6 @@ class AuthService extends GetConnect {
       },
     );
 
-    print(response.body);
     if (response.statusCode == HttpStatus.ok) {
       return CitizenResponseModel.fromJson(response.body);
     } else {

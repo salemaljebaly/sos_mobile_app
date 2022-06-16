@@ -23,9 +23,13 @@ class ReportService extends GetConnect {
         'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
       },
     );
-    print(response.body);
     if (response.statusCode == HttpStatus.created) {
-      return response.body;
+      CreateReportResponse reportResponse =
+          CreateReportResponse.fromJson(response.body);
+      print(reportResponse.runtimeType);
+      print(reportResponse.reporter.firstName);
+      return reportResponse;
+      // return response.body;
     } else {
       return null;
     }
@@ -107,7 +111,7 @@ class ReportService extends GetConnect {
   // upload report image
   Future<Response?> upload(int id, dynamic data) async {
     final form = FormData({
-      'file': MultipartFile(data, filename: 'avatar.png'),
+      'file': MultipartFile(data, filename: 'file'),
     });
     final response = await post("$url$path/upload", form, headers: {
       'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',

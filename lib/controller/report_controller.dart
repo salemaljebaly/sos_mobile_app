@@ -19,6 +19,7 @@ class ReportConteroller extends GetxController {
   RxString longitude = ''.obs;
   RxInt reportCount = 0.obs;
   RxList<ReportResponse> reports = <ReportResponse>[].obs;
+  RxInt reportId = 0.obs;
 
   @override
   void onInit() {
@@ -43,6 +44,7 @@ class ReportConteroller extends GetxController {
         duration: const Duration(seconds: 1),
         icon: const Icon(Icons.local_police),
       );
+      reportId.value = response.id;
       return response.id;
     } else {
       /// Show user a dialog about the error response

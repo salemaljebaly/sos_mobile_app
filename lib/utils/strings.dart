@@ -73,5 +73,7 @@ class Strings {
   static String done = 'تم التعامل مع التقرير';
 
   static String createReport = 'تقديم بلاغ';
+
+  static var dontHaveAccess = 'يوجد خطا في البيانات';
   // ------------------------------------------------------------------------ //
 }
