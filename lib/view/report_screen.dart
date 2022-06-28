@@ -29,11 +29,18 @@ class _ReportScreenState extends State<ReportScreen> {
       final imageTemp = File(image.path);
       setState(() {
         this.image = imageTemp;
-        print('image' + image.toString());
+        print('image' + image.path);
       });
     } on PlatformException catch (e) {
       print('failed to pick file: $e');
     }
+  }
+
+  @override
+  void initState() {
+    print('from screen' + _reportConteroller.reportId.value.toString());
+    // TODO: implement initState
+    super.initState();
   }
 
   // --------------------------------------------------------------------------- //
@@ -139,30 +146,30 @@ class _ReportScreenState extends State<ReportScreen> {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(4.0),
-              //   child: Row(
-              //     children: [
-              //       Expanded(
-              //         child: buildButton(
-              //           icon: Icons.image_outlined,
-              //           title: 'صورة مخزنة',
-              //           onClicked: () => pickImage(ImageSource.gallery),
-              //         ),
-              //       ),
-              //       const SizedBox(
-              //         width: 10,
-              //       ),
-              //       Expanded(
-              //         child: buildButton(
-              //           icon: Icons.camera_outlined,
-              //           title: 'التقاط صورة',
-              //           onClicked: () => pickImage(ImageSource.camera),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: buildButton(
+                        icon: Icons.image_outlined,
+                        title: 'صورة مخزنة',
+                        onClicked: () => pickImage(ImageSource.gallery),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: buildButton(
+                        icon: Icons.camera_outlined,
+                        title: 'التقاط صورة',
+                        onClicked: () => pickImage(ImageSource.camera),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: SizedBox(
@@ -183,12 +190,10 @@ class _ReportScreenState extends State<ReportScreen> {
                         latitude: _reportConteroller.latitude.value.toString(),
                       );
 
-                      _reportConteroller.create(model);
-                      // Future.delayed(const Duration(seconds: 1));
-                      // print('id from report' +
-                      //     _reportConteroller.reportId.value.toString());
-                      // _reportConteroller.upload(
-                      //     _reportConteroller.reportId.value, this.image);
+                      int reportId =
+                          await _reportConteroller.create(model) as int;
+                      Future.delayed(const Duration(seconds: 2));
+                      _reportConteroller.upload(reportId, image?.path);
                     },
                     child: Text(
                       Strings.sendReport,

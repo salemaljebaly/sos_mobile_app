@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
@@ -9,7 +7,6 @@ import 'package:sos_mobile_app/model/citizen_response_model.dart';
 import 'package:sos_mobile_app/routes/app_pages.dart';
 import 'package:sos_mobile_app/services/auth_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
-import 'package:sos_mobile_app/view/home_screen.dart';
 
 class AuthController extends GetxController {
   late final AuthService _authService;

@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
@@ -7,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:sos_mobile_app/controller/cache_token.dart';
 import 'package:sos_mobile_app/model/create_report_response.dart';
 import 'package:sos_mobile_app/model/report.dart';
+import 'package:sos_mobile_app/model/report_image_response.dart';
 import 'package:sos_mobile_app/model/report_response.dart';
 
 class ReportService extends GetConnect {
@@ -26,8 +26,6 @@ class ReportService extends GetConnect {
     if (response.statusCode == HttpStatus.created) {
       CreateReportResponse reportResponse =
           CreateReportResponse.fromJson(response.body);
-      print(reportResponse.runtimeType);
-      print(reportResponse.reporter.firstName);
       return reportResponse;
       // return response.body;
     } else {
@@ -109,15 +107,34 @@ class ReportService extends GetConnect {
 
   // -------------------------------------------------------------------------- //
   // upload report image
-  Future<Response?> upload(int id, dynamic data) async {
-    final form = FormData({
-      'file': MultipartFile(data, filename: 'file'),
-    });
-    final response = await post("$url$path/upload", form, headers: {
+  Future<ReportImageResponse?> upload(int id, dynamic data) async {
+    // headers
+    var headers = {
       'Authorization': 'Bearer ${token.read(CacheTokenKey.token.toString())}',
-    });
+    };
+    // make request
+    var request =
+        http.MultipartRequest('POST', Uri.parse('$url$path/upload/$id'));
+    // add request reportId
+    request.fields.addAll({'reportId': '$id'});
+    // add file
+    request.files.add(await http.MultipartFile.fromPath('file', data));
+    // add headers
+    request.headers.addAll(headers);
+    // send request
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+
+    print('upload from service' + response.toString());
     if (response.statusCode == HttpStatus.ok) {
-      return response.body;
+      ReportImageResponse reportImage =
+          ReportImageResponse.fromRawJson(response.stream.toString());
+      return reportImage;
     } else {
       return null;
     }

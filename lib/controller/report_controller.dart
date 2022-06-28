@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sos_mobile_app/controller/auth_manager.dart';
-import 'package:sos_mobile_app/model/create_report_response.dart';
 import 'package:sos_mobile_app/model/report.dart';
+import 'package:sos_mobile_app/model/report_image_response.dart';
 import 'package:sos_mobile_app/model/report_response.dart';
 import 'package:sos_mobile_app/services/report_service.dart';
 import 'package:sos_mobile_app/utils/strings.dart';
@@ -33,7 +32,6 @@ class ReportConteroller extends GetxController {
   Future<int?> create(Report model) async {
     final response = await _reportService.create(model);
 
-    print(response.toString());
     if (response != null) {
       // show snackbar
       Get.snackbar(
@@ -64,7 +62,6 @@ class ReportConteroller extends GetxController {
   // find one report
   Future<Report?> findOne(int id) async {
     final response = await _reportService.findOne(id);
-    print(response.runtimeType);
     if (response != null) {
       reportState.value = response.state;
       reportdesc.value = response.desc;
@@ -95,7 +92,6 @@ class ReportConteroller extends GetxController {
   ) async {
     final response = await _reportService.update(id, model);
 
-    print(response.toString());
     if (response != null) {
       print(response.body);
     } else {
@@ -159,24 +155,25 @@ class ReportConteroller extends GetxController {
 
   // ------------------------------------------------------------------------ //
   // get all  report
-  Future<int> upload(int id, dynamic data) async {
+  Future<ReportImageResponse?> upload(int id, dynamic data) async {
     final response = await _reportService.upload(id, data);
 
     print(response.toString());
     if (response != null) {
       print(response);
+      return response;
     } else {
       /// Show user a dialog about the error response
-      Get.defaultDialog(
-          buttonColor: Colors.red[200],
-          middleText: Strings.someThingWrong,
-          textConfirm: Strings.ok,
-          confirmTextColor: Colors.white,
-          onConfirm: () {
-            Get.back();
-          });
+      // Get.defaultDialog(
+      //     buttonColor: Colors.red[200],
+      //     middleText: Strings.someThingWrong,
+      //     textConfirm: Strings.ok,
+      //     confirmTextColor: Colors.white,
+      //     onConfirm: () {
+      //       Get.back();
+      //     });
+      // return null;
     }
-    return 0;
   }
 
   // ------------------------------------------------------------------------ //
