@@ -22,7 +22,7 @@ dependencies:
   google_fonts: ^4.0.1
   google_maps_flutter: ^2.2.3
   geolocator: ^9.0.2
-  url_launcher: ^6.1.8
+  url_launcher: ^6.1.10
   image_picker: ^0.8.6
   timelines: ^0.1.0
   http: ^0.13.5
