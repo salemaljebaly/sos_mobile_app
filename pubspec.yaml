@@ -18,7 +18,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   get_storage: ^2.0.3
   # support svg icon format 
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.2
   google_fonts: ^4.0.1
   google_maps_flutter: ^2.2.3
   geolocator: ^9.0.2
